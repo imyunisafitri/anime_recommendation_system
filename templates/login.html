@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="card-l  p-4 login-card">
+        <h2 class="card-title text-center">Login</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="user_id">User ID:</label>
+                <input type="text" class="form-control" name="user_id" id="user_id" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %} {% if
+recommendations %} {% if is_new_user %}
+<h1 class="mb-4">Rekomendasi Berdasarkan Genre untuk {{ username }}</h1>
+{% else %}
+<h1 class="mb-4">Rekomendasi untuk {{ username }}</h1>
+{% endif %}
+<div class="row">
+  {% for anime in recommendations %}
+  <div class="col-md-4 mb-4">
+    <div class="card anime-card">
+      <img
+        src="{{ anime['image_url'] }}"
+        class="card-img-top anime-img"
+        alt="{{ anime['name'] }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ anime['name'] }}</h5>
+        <div>
+          {% if 'genres' in anime %} {% for genre in anime['genres'].split(', ') %}
+          <button type="button" class="btn btn-sm btn-info">{{ genre }}</button>
+          {% endfor %} {% else %}
+          <span class="text-muted">Genre tidak tersedia</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% if animes %}
+<h1 class="mb-4 font-weight-bold">10 Anime Populer</h1>
+<div class="row">
+  {% for anime in animes %}
+  <div class="col-md-4 mb-4">
+    <div class="card anime-card">
+      <img
+        src="{{ anime['image_url'] }}"
+        class="card-img-top anime-img"
+        alt="{{ anime['name'] }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ anime['name'] }}</h5>
+        <!-- Tidak menampilkan genre untuk anime populer -->
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endblock %}

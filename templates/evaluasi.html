@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluasi{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Evaluasi Sistem</h2>
+
+    <!-- Grafik Pencarian Nilai K Terbaik -->
+    <h3 class="text-center">Pencarian Nilai K Terbaik untuk Hasil MAE Terbaik pada CF</h3>
+    <div class="mb-4">
+        <canvas id="maeCfChart" style="width: 100%; max-width: 600px; margin: 0 auto;"></canvas>
+    </div>
+
+    <!-- Tabel Perbandingan Nilai MAE -->
+    <h3 class="text-center">Perbandingan Nilai MAE untuk Setiap Model</h3>
+    <div class="d-flex justify-content-center">
+        <table class="table table-bordered" style="width: 50%;">
+            <thead>
+                <tr>
+                    <th>Metode</th>
+                    <th>MAE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in mae_values %}
+                <tr>
+                    <td>{{ row.method }}</td>
+                    <td>{{ row.mae }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Grafik Nilai ILS -->
+    <h3 class="text-center">Grafik Nilai ILS untuk Setiap Metode pada Top-N</h3>
+    <div class="mb-4">
+        <canvas id="ilsChart" style="width: 100%; max-width: 600px; margin: 0 auto;"></canvas>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Data untuk grafik MAE CF
+    const maeCfData = {
+        labels: [50, 100, 150, 200, 250],
+        datasets: [{
+            label: 'MAE',
+            data: {{ mae_cf_data|tojson }},
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    const maeCfConfig = {
+        type: 'line',
+        data: {
+            labels: maeCfData.labels,
+            datasets: [{
+                label: 'MAE',
+                data: maeCfData.datasets[0].data.map(item => item.mae),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'K'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'MAE'
+                    }
+                }
+            }
+        }
+    };
+
+    const maeCfChart = new Chart(
+        document.getElementById('maeCfChart'),
+        maeCfConfig
+    );
+
+    // Data untuk grafik ILS
+    const ilsData = {
+        labels: ['6', '8', '10'],
+        datasets: [
+            {
+                label: 'CBF',
+                data: [0.560362, 0.560362, 0.560362],
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: false,
+                tension: 0.1
+            },
+            {
+                label: 'CF',
+                data: [0.308798, 0.302304, 0.301962],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: false,
+                tension: 0.1
+            },
+            {
+                label: 'Hybrid',
+                data: [0.387691, 0.380886, 0.374583],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1
+            }
+        ]
+    };
+
+    const ilsConfig = {
+        type: 'line',
+        data: {
+            labels: ilsData.labels,
+            datasets: ilsData.datasets
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Jumlah N'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'ILS'
+                    }
+                }
+            }
+        }
+    };
+
+    const ilsChart = new Chart(
+        document.getElementById('ilsChart'),
+        ilsConfig
+    );
+</script>
+{% endblock %}

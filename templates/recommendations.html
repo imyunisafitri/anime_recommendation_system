@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block content %}
+<h1>Recommended Anime for {{ username }}</h1>
+<div class="row">
+    {% for anime in recommendations %}
+        <div class="col-md-2 mb-4">
+            <div class="card anime-card">
+                <img src="{{ anime.image_url }}" class="card-img-top anime-img" alt="{{ anime.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ anime.name }}</h5>
+                    <p>Genres: {{ anime.genres }}</p>
+                    <p>Average Rating: {{ anime.average_rating }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

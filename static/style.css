@@ -1,0 +1,100 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.form-control {
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.btn-block {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+.form-check-input {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.form-check-label {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.alert {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-right: 0.5rem;
+}
+
+
+/* style.css */
+.anime-img {
+  width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Pusatkan gambar secara horizontal */
+}
+
+.anime-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Ratakan teks ke bawah */
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-title, .card-body p {
+  margin: 0; /* Hilangkan margin default */
+}
+.login-card {
+  width: 25rem;
+  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
